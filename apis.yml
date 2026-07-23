@@ -1,8 +1,16 @@
 aid: agentio
 name: Agentio
-description: 'Agentio is a company surfaced as a portfolio company of craft-ventures, forerunner-ventures
-  and added to the API Evangelist network as a stub for enrichment. Sector: adtech. This profile is a
-  lead awaiting the enrichment pipeline.'
+description: 'Agentio is an AI-native platform for creator advertising that connects
+  brands with content creators across YouTube, Meta, and beyond. The two-sided platform
+  gives brands agentic tooling to build, automate, and scale creator programs — handling
+  creator matching and vetting, performance prediction from first-party creator data,
+  campaign management, full-funnel measurement, and optimization — while giving creators
+  personalized opportunities from top brands without manual negotiation. Founded by
+  Arthur Leopold and Jonathan Meyers and based in Brooklyn, New York, Agentio holds
+  official API marketing-partner status with closed advertising ecosystems and has
+  raised $56M total, including a $40M Series B led by Forerunner at a $340M valuation.
+  Agentio operates a private product application (app.agentio.com) and does not
+  currently publish a public developer API, OpenAPI specification, or developer portal.'
 url: https://raw.githubusercontent.com/api-evangelist/agentio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +19,30 @@ x-backed-by:
 - forerunner-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/64dabf3558320122b88c5b84/6912391402abbaf1724f8173_agentio-logo-cropped%20(1).png
 specificationVersion: '0.20'
 created: '2026-07-17'
 modified: '2026-07-17'
 tags:
 - Company
 - Adtech
+- Advertising
+- Creator Economy
+- Influencer Marketing
+- Marketing
+- Artificial Intelligence
+- YouTube
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -25,4 +51,21 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://agentio.com
+  url: https://www.agentio.com
+- type: Blog
+  url: https://www.agentio.com/blog
+- type: Support
+  url: https://www.agentio.com/contact
+- type: Login
+  url: https://app.agentio.com/signin
+- type: TermsOfService
+  url: https://www.agentio.com/terms
+- type: PrivacyPolicy
+  url: https://www.agentio.com/privacy
+- type: DomainSecurity
+  url: security/agentio-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
