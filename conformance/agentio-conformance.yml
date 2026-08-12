@@ -1,0 +1,80 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.agentio.com/security, https://www.agentio.com/connector,
+  https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp,
+  https://api.agentio.com/.well-known/oauth-authorization-server/o
+note: >-
+  Agentio has no OpenAPI, so nothing here is derived from a spec. Every entry is grounded in a
+  document Agentio serves itself, or in an observed protocol behavior on the live MCP endpoint.
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    Agentio operates a hosted remote MCP server at https://mcp.agentio.com/mcp, documented at
+    https://www.agentio.com/connector ("Agentio speaks MCP (Model Context Protocol), the open
+    standard AI assistants use to reach outside data"). The endpoint speaks JSON-RPC 2.0 and
+    returns an RFC 9728 challenge to unauthenticated calls. The negotiated protocolVersion could
+    not be observed because initialize is auth-gated (HTTP 401).
+- id: jsonrpc-2.0
+  conforms: true
+  evidence: MCP transport; the endpoint accepts JSON-RPC 2.0 request envelopes
+- id: oauth2
+  name: OAuth 2.0 / 2.1 authorization code
+  conforms: true
+  evidence: >-
+    grant_types_supported = ["authorization_code", "refresh_token"] in the authorization-server
+    metadata at https://api.agentio.com/.well-known/oauth-authorization-server/o
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: >-
+    200 application/json at https://api.agentio.com/.well-known/oauth-authorization-server/o
+    (issuer-suffixed path form)
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: >-
+    200 application/json at https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp,
+    advertised via the WWW-Authenticate resource_metadata parameter on every 401
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported = ["S256"]
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: >-
+    registration_endpoint = https://api.agentio.com/o/register; a GET returns 405
+    Method Not Allowed, confirming a live POST-only registration endpoint
+- id: rfc7009-token-revocation
+  conforms: true
+  evidence: revocation_endpoint = https://api.agentio.com/o/revoke_token
+- id: oidc
+  name: OpenID Connect discovery
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration returns 404 on api.agentio.com (both plain and
+    issuer-suffixed) and 401 on mcp.agentio.com; the server advertises OAuth only, no id_token
+- id: openapi
+  conforms: false
+  evidence: no OpenAPI or Swagger document served on any Agentio host
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    the observed error body is a bare {"error": "invalid_token"} JSON object with
+    content-type application/json, not application/problem+json
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on www, app and api
+- id: soc2-type-2
+  name: SOC 2 Type 2
+  conforms: true
+  evidence: >-
+    https://www.agentio.com/security states "Compliance: SOC 2 Type 2" and describes the
+    governance program, data-at-rest and in-transit encryption (TLS 1.2+), GCP Secret Manager
+    secret management, SDLC vulnerability scanning, and managed endpoints. No audit report or
+    trust portal is linked publicly.
+- id: hsts
+  conforms: true
+  evidence: 'strict-transport-security: max-age=31536000; includeSubDomains observed on the
+    Agentio hosts (see security/agentio-domain-security.yml)'
+x-evidence:
+  fetched: '2026-08-12'

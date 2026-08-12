@@ -1,16 +1,22 @@
-generated: '2026-07-17'
+generated: '2026-08-12'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
-- host: agentio.com
+- host: www.agentio.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Oct  4 03:33:02 2026 GMT
+  cert_expires: Nov  9 05:22:17 2026 GMT
   hsts: true
   hsts_max_age: 31536000
+- host: mcp.agentio.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  2 12:03:18 2026 GMT
+  hsts: null
 domains:
 - domain: agentio.com
   dnssec: false
   caa: []
   spf: true
-  dmarc: false
+  dmarc: true
+  dmarc_policy: none

@@ -1,0 +1,27 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.agentio.com/connector, live probes of https://mcp.agentio.com/mcp
+limit_count: 0
+rate_limits: []
+note: >-
+  Agentio documents no rate limits. The connector page — the only public documentation of the
+  MCP server — describes access, scoping and setup, but names no quota, window, burst, or
+  throttling behavior, and there is no developer portal or API reference to carry one. No
+  rate-limit response headers were observed on any anonymous request: the 401 responses from
+  mcp.agentio.com carry only content-type, www-authenticate, x-cloud-trace-context, date,
+  server, content-length, via and alt-svc. Whether limits exist behind the OAuth wall cannot be
+  determined without an authenticated session, so this is an honest zero, not an assertion that
+  the API is unlimited.
+headers_observed: []
+headers_documented: []
+exhaustion_status: unknown
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://mcp.agentio.com/mcp
+    method: POST
+    http_status: 401
+    rate_limit_headers: none
+  - url: https://www.agentio.com/connector
+    http_status: 200
+    note: no rate-limit language on the page

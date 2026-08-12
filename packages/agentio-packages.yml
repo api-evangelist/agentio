@@ -1,0 +1,38 @@
+generated: '2026-08-12'
+method: searched
+source: npm registry search, PyPI, and the Agentio site (no SDK or download page exists)
+packages: []
+package_count: 0
+note: >-
+  Agentio ships NO first-party client libraries, and by design does not need any: its only
+  public API surface is a hosted remote MCP server that an MCP client connects to by URL, so the
+  MCP client itself is the SDK. Searched npm (no @agentio scope; the three `agentio`-named npm
+  packages — @plosson/agentio, @dvrosalesm/agentio, @0xagentio/axl-local — are unrelated
+  third-party projects), PyPI (`agentio` 0.1.0 is published by Peter Leupi, unrelated), and the
+  agentio.com site, which has no SDK, download, or developer page. apis.yml carries no SDK, CLI,
+  or SourceCode link to derive candidates from. No SDKs pointer is emitted.
+negative_findings:
+- registry: npm
+  query: agentio
+  result: no first-party package; nearest names belong to unrelated publishers
+  version: null
+- registry: pypi
+  package: agentio
+  result: not first-party (author "Peter Leupi", version 0.1.0)
+  version: null
+- registry: github
+  org: https://github.com/Agentio-Inc
+  result: >-
+    an organization by that name exists with four public repositories, all of them forks of
+    third-party projects (django-rest-authemail, yt-dlp, django-sendgrid-v5, django-mcp-server)
+    with no Agentio-authored commits, no public members, and no profile metadata. The fork set
+    is suggestive (a Django MCP server and a YouTube downloader match Agentio's stack), but
+    agentio.com links to no GitHub organization anywhere, so ownership is UNVERIFIED and no
+    GitHubOrganization pointer is emitted.
+  version: null
+- registry: github
+  org: https://github.com/agentio
+  result: NOT Agentio — this org is "Agent IO" at agent.io, a different company
+  version: null
+x-evidence:
+  fetched: '2026-08-12'

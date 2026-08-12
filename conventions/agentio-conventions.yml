@@ -1,0 +1,63 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.agentio.com/connector, live probes of https://mcp.agentio.com/mcp
+note: >-
+  Agentio's only public API surface is a hosted MCP server, so these conventions are MCP/JSON-RPC
+  conventions plus the OAuth contract, not REST conventions. There is no OpenAPI to derive from.
+  Anything Agentio does not publish is recorded as unknown rather than guessed.
+surface:
+  style: JSON-RPC 2.0 over MCP streamable HTTP
+  endpoint: https://mcp.agentio.com/mcp
+  transport: http
+  mutability: read-only (stated in the connector documentation)
+authentication:
+  style: OAuth 2.1 bearer token in the Authorization header
+  scopes:
+  - brand-connector:read
+  challenge: 'HTTP 401 with WWW-Authenticate: Bearer resource_metadata="https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp"'
+  discovery: RFC 9728 protected-resource metadata -> RFC 8414 authorization-server metadata
+  dynamic_client_registration: supported (RFC 7591) — clients self-register at
+    https://api.agentio.com/o/register
+  profile: authentication/agentio-authentication.yml
+tenancy:
+  model: one connection is pinned to exactly one brand, chosen at consent time
+  switching: reconnect from the client and pick the other brand
+  isolation: a connection can never reach another brand's data (stated in the docs)
+idempotency:
+  supported: false
+  note: >-
+    NOT APPLICABLE, not merely undocumented. The connector is read-only by design — it "can't
+    change anything in your account" — so there is no unsafe operation for an idempotency key to
+    protect. No idempotency header is documented and none should be expected. No Idempotency
+    pointer is emitted for this provider.
+pagination:
+  documented: false
+  note: not published; the tool schemas that would reveal any cursor/limit parameters are
+    behind authenticated introspection
+field_expansion:
+  documented: false
+metadata:
+  documented: false
+request_tracing:
+  documented: false
+  observed: >-
+    responses carry an x-cloud-trace-context header from Google Cloud Frontend infrastructure;
+    it is a platform trace id, not a documented Agentio request-id contract
+versioning:
+  documented: false
+  cross_ref: lifecycle/agentio-lifecycle.yml
+error_envelope:
+  shape: '{"error": "<code>"}'
+  content_type: application/json
+  observed_values:
+  - invalid_token
+  rfc9457: false
+  cross_ref: errors/agentio-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  observed_headers: []
+  note: >-
+    no X-RateLimit-*, RateLimit-* or Retry-After headers observed on any anonymous response
+  cross_ref: rate-limits/agentio-rate-limits.yml
+x-evidence:
+  fetched: '2026-08-12'

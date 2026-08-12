@@ -1,0 +1,70 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.agentio.com/connector
+status: published
+server:
+  name: Agentio Brand Connector
+  transport: http
+  url: https://mcp.agentio.com/mcp
+  protocol: MCP (Model Context Protocol) over JSON-RPC 2.0
+  hosting: 'vendor-hosted (remote); Google Cloud (Server header: Google Frontend)'
+  docs: https://www.agentio.com/connector
+  support: support@agentio.com
+access:
+  mode: read-only
+  scoping: one brand per connection; the brand is chosen during the OAuth consent step
+  stated_limits:
+  - cannot change anything in the account
+  - cannot reach another brand's data
+  - cannot act on the user's behalf
+  prerequisites:
+  - an Agentio account (sign-in happens during connector setup)
+  - an MCP client that supports custom connectors (docs name Claude and ChatGPT; any MCP
+    client works the same way)
+  - availability depends on the customer's Agentio plan, and a workspace admin may control
+    which connectors can be added
+  management: Settings -> Integrations in the Agentio app lists every connected AI app and
+    when it connected; disconnecting takes effect immediately. Each app holds one connection.
+authorization:
+  scheme: OAuth 2.1 authorization code + PKCE
+  challenge: 'anonymous requests return HTTP 401 with WWW-Authenticate: Bearer
+    resource_metadata="https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp"'
+  protected_resource_metadata: well-known/agentio-oauth-protected-resource.json
+  authorization_server_metadata: well-known/agentio-oauth-authorization-server.json
+  scopes:
+  - brand-connector:read
+  profile: authentication/agentio-authentication.yml
+tools:
+  introspection: gated
+  note: >-
+    NOT ENUMERATED. An anonymous JSON-RPC tools/list POST to https://mcp.agentio.com/mcp
+    returns HTTP 401 {"error": "invalid_token"}, and initialize returns 401 as well, so the
+    live tool names and inputSchemas require an authenticated introspection with a
+    brand-connector:read token. Agentio publishes no llms.txt and no tool reference page, so
+    there is no published tool list to fall back on. No tool names are recorded here, because
+    inventing them would fabricate the provider's contract.
+  documented_capabilities:
+  - read campaigns
+  - read creator deals and deliverables
+  - read YouTube ad performance
+  - read conversion reporting
+  - explain how Agentio works (metric definitions, how a workflow runs)
+  documented_example_questions:
+  - Which of my campaigns are running right now?
+  - How did my YouTube ads perform last month, broken down by campaign?
+  - What did we spend per conversion last quarter, and which sources did those conversions
+    come from?
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://mcp.agentio.com/mcp
+    method: POST tools/list
+    http_status: 401
+    body: '{"error": "invalid_token"}'
+  - url: https://mcp.agentio.com/mcp
+    method: POST initialize
+    http_status: 401
+  - url: https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp
+    http_status: 200
+  - url: https://www.agentio.com/connector
+    http_status: 200

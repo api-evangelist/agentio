@@ -1,0 +1,85 @@
+generated: '2026-08-12'
+method: searched
+source: https://api.agentio.com/.well-known/oauth-authorization-server/o
+docs: https://www.agentio.com/connector
+note: >-
+  Agentio publishes no OpenAPI, so this profile is not derived from securitySchemes. It is read
+  directly from the two discovery documents Agentio serves anonymously for its hosted MCP server
+  (RFC 9728 protected-resource metadata on mcp.agentio.com, RFC 8414 authorization-server
+  metadata on api.agentio.com) plus the connector documentation. Every value below is copied
+  verbatim from those documents.
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorization_code
+  - refresh_token
+  bearer_methods:
+  - header
+  pkce: required (S256 is the only code_challenge_method advertised)
+  dynamic_client_registration: true
+  client_authentication: none (public clients; token_endpoint_auth_methods_supported = ["none"])
+schemes:
+- name: AgentioBrandConnectorOAuth
+  type: oauth2
+  applies_to: https://mcp.agentio.com/mcp
+  sources:
+  - well-known/agentio-oauth-authorization-server.json
+  - well-known/agentio-oauth-protected-resource.json
+  issuer: https://api.agentio.com/o
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.agentio.com/connector/consent
+    tokenUrl: https://api.agentio.com/o/token
+    refreshUrl: https://api.agentio.com/o/token
+    scopes:
+      brand-connector:read: Read-only access to one brand's Agentio data via the MCP connector
+  endpoints:
+    authorization_endpoint: https://app.agentio.com/connector/consent
+    token_endpoint: https://api.agentio.com/o/token
+    registration_endpoint: https://api.agentio.com/o/register
+    revocation_endpoint: https://api.agentio.com/o/revoke_token
+  advertised:
+    response_types_supported:
+    - code
+    grant_types_supported:
+    - authorization_code
+    - refresh_token
+    code_challenge_methods_supported:
+    - S256
+    token_endpoint_auth_methods_supported:
+    - none
+    client_id_metadata_document_supported: true
+    bearer_methods_supported:
+    - header
+protected_resources:
+- resource: https://mcp.agentio.com/mcp
+  authorization_servers:
+  - https://api.agentio.com/o
+  scopes_supported:
+  - brand-connector:read
+consent:
+  step: >-
+    The user is sent to app.agentio.com/connector/consent in a browser, confirms the
+    connection, and picks which brand the connection is pinned to when they have more than one.
+  revocation: >-
+    Settings -> Integrations in the Agentio app lists every connected AI app; disconnecting
+    takes effect immediately and cuts that app's access. There is also an RFC 7009 revocation
+    endpoint at https://api.agentio.com/o/revoke_token.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://api.agentio.com/.well-known/oauth-authorization-server/o
+    http_status: 200
+    content_type: application/json
+  - url: https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp
+    http_status: 200
+    content_type: application/json
+  - url: https://api.agentio.com/o/token
+    method: GET
+    http_status: 405
+    note: method-not-allowed confirms the token endpoint is live and POST-only
+  - url: https://api.agentio.com/o/register
+    method: GET
+    http_status: 405
+    note: 'returns {"detail": "Method \"GET\" not allowed."} — the DCR endpoint is live'

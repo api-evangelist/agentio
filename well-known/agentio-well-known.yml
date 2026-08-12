@@ -1,0 +1,93 @@
+generated: '2026-08-12'
+method: searched
+source: live probes of every Agentio host (www, app, api, mcp)
+note: >-
+  Agentio serves no security.txt, no api-catalog and no ai-plugin.json on any host. It DOES
+  serve two real machine-readable discovery documents for its hosted MCP server: an RFC 9728
+  OAuth 2.0 Protected Resource Metadata document on mcp.agentio.com (advertised in the
+  WWW-Authenticate challenge returned by every anonymous request to the MCP endpoint), and the
+  matching RFC 8414 OAuth 2.0 Authorization Server Metadata document on api.agentio.com at the
+  issuer-suffixed path /.well-known/oauth-authorization-server/o. Both were fetched anonymously.
+  Note that mcp.agentio.com answers 401 {"error": "invalid_token"} for every /.well-known/* path
+  it does not implement, and www/app/api answer 404 with an HTML body, so the two 200s below are
+  the only documents served.
+hosts:
+- host: https://mcp.agentio.com
+  documents:
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 200
+    content_type: application/json
+    file: agentio-oauth-protected-resource.json
+    spec: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    note: identical body to the /mcp-suffixed path; not saved twice
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+    note: 'not implemented on this host; returns {"error": "invalid_token"}'
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+- host: https://api.agentio.com
+  documents:
+  - path: /.well-known/oauth-authorization-server/o
+    status: 200
+    content_type: application/json
+    file: agentio-oauth-authorization-server.json
+    spec: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/openid-configuration/o
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://www.agentio.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://app.agentio.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+x-evidence:
+  fetched: '2026-08-12'
+  documents_served: 2
+  security_txt: false
+  api_catalog: false
+  agent_card: false

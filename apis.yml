@@ -9,8 +9,13 @@ description: 'Agentio is an AI-native platform for creator advertising that conn
   Arthur Leopold and Jonathan Meyers and based in Brooklyn, New York, Agentio holds
   official API marketing-partner status with closed advertising ecosystems and has
   raised $56M total, including a $40M Series B led by Forerunner at a $340M valuation.
-  Agentio operates a private product application (app.agentio.com) and does not
-  currently publish a public developer API, OpenAPI specification, or developer portal.'
+  Agentio operates a private product application (app.agentio.com) and publishes no REST
+  OpenAPI, GraphQL schema, or developer portal — but it does run a documented, production
+  hosted MCP (Model Context Protocol) server, the Agentio Brand Connector at
+  https://mcp.agentio.com/mcp, which lets a brand read its own campaigns, creator deals and
+  deliverables, YouTube ad performance, and conversion reporting from any MCP client such as
+  Claude or ChatGPT. Access is read-only, scoped to a single brand, and gated by OAuth 2.1
+  with PKCE and dynamic client registration.'
 url: https://raw.githubusercontent.com/api-evangelist/agentio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -33,7 +38,7 @@ accessModel:
 image: https://cdn.prod.website-files.com/64dabf3558320122b88c5b84/6912391402abbaf1724f8173_agentio-logo-cropped%20(1).png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-08-12'
 tags:
 - Company
 - Adtech
@@ -43,7 +48,43 @@ tags:
 - Marketing
 - Artificial Intelligence
 - YouTube
-apis: []
+- MCP
+- Model Context Protocol
+- Agents
+- Analytics
+apis:
+- name: Agentio Brand Connector (MCP)
+  description: 'Agentio''s hosted, remote Model Context Protocol server. A brand adds
+    https://mcp.agentio.com/mcp to any MCP client (Claude, ChatGPT, or any other custom-connector
+    host), authorizes over OAuth 2.1, and picks one brand to pin the connection to. The
+    connector is READ-ONLY: it can read campaigns, creator deals and deliverables, YouTube
+    ad performance, and conversion reporting, and can answer questions about how Agentio
+    works (metric definitions, workflow behavior). It cannot change account data, act on
+    the user''s behalf, or reach another brand''s data. The live tools/list manifest is
+    auth-gated — an anonymous JSON-RPC call returns HTTP 401 {"error": "invalid_token"}
+    with an RFC 9728 WWW-Authenticate challenge — so tool input schemas require an authenticated
+    introspection.'
+  humanURL: https://www.agentio.com/connector
+  baseURL: https://mcp.agentio.com/mcp
+  tags:
+  - MCP
+  - Model Context Protocol
+  - Agents
+  - Advertising
+  - Analytics
+  properties:
+  - type: MCPServer
+    url: mcp/agentio-mcp.yml
+  - type: Documentation
+    url: https://www.agentio.com/connector
+  - type: Authentication
+    url: authentication/agentio-authentication.yml
+  - type: OAuthScopes
+    url: scopes/agentio-scopes.yml
+  - type: Conventions
+    url: conventions/agentio-conventions.yml
+  - type: ErrorCatalog
+    url: errors/agentio-problem-types.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -64,8 +105,44 @@ common:
   url: https://www.agentio.com/privacy
 - type: DomainSecurity
   url: security/agentio-domain-security.yml
+- type: Documentation
+  url: https://www.agentio.com/connector
+- type: GettingStarted
+  url: https://www.agentio.com/connector
+- type: SignUp
+  url: https://www.agentio.com/signup
+- type: StatusPage
+  url: https://status.agentio.com/
+- type: Compliance
+  url: https://www.agentio.com/security
+- type: TrustCenter
+  url: security/agentio-trust-center.yml
+- type: MCPServer
+  url: mcp/agentio-mcp.yml
+- type: WellKnown
+  url: well-known/agentio-well-known.yml
+- type: Authentication
+  url: authentication/agentio-authentication.yml
+- type: OAuthScopes
+  url: scopes/agentio-scopes.yml
+- type: Conformance
+  url: conformance/agentio-conformance.yml
+- type: Conventions
+  url: conventions/agentio-conventions.yml
+- type: ErrorCatalog
+  url: errors/agentio-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/agentio-lifecycle.yml
+- type: Packages
+  url: packages/agentio-packages.yml
+- type: Plans
+  url: plans/agentio-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/agentio-rate-limits.yml
+- type: LLMsTxt
+  url: llms/agentio-llms.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 15
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence

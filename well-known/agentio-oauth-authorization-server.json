@@ -1,0 +1,24 @@
+{
+  "issuer": "https://api.agentio.com/o",
+  "authorization_endpoint": "https://app.agentio.com/connector/consent",
+  "token_endpoint": "https://api.agentio.com/o/token",
+  "registration_endpoint": "https://api.agentio.com/o/register",
+  "revocation_endpoint": "https://api.agentio.com/o/revoke_token",
+  "scopes_supported": [
+    "brand-connector:read"
+  ],
+  "response_types_supported": [
+    "code"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "code_challenge_methods_supported": [
+    "S256"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
+  "client_id_metadata_document_supported": true
+}

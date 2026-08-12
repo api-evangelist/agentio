@@ -1,0 +1,26 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.agentio.com/ (sitemap-complete crawl; no pricing page exists)
+plan_count: 0
+plans: []
+note: >-
+  Agentio publishes NO pricing. https://www.agentio.com/pricing returns HTTP 404 and the full
+  sitemap (46 URLs) contains no pricing, plans, or tiers page — the commercial path is a "Get
+  started" / contact-sales form. The MCP connector is not sold separately: the connector
+  documentation says "Availability depends on your plan", which confirms plan-gating exists but
+  publishes no plan names, prices, quotas, or overages. Agentio also runs a free public
+  creator-partnerships cost calculator (/creator-partnerships-cost-calculator), which prices
+  creator media, not Agentio itself.
+sales_gate:
+  contact: https://www.agentio.com/contact
+  signup: https://www.agentio.com/signup
+  connector_availability: gated by the customer's Agentio plan and, in managed workspaces, by
+    the AI-app admin
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://www.agentio.com/pricing
+    http_status: 404
+  - url: https://www.agentio.com/sitemap.xml
+    http_status: 200
+    note: 46 URLs, none pricing-related

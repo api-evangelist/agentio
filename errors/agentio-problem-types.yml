@@ -1,0 +1,49 @@
+generated: '2026-08-12'
+method: probed
+source: live requests to https://mcp.agentio.com/mcp
+format: vendor-json
+note: >-
+  Agentio publishes no error reference and no OpenAPI, so nothing here is derived from a spec or
+  a docs page. The single entry below is the error Agentio actually returned on an observed
+  anonymous request. It is not RFC 9457: the body is a bare JSON object with an `error` string
+  and content-type application/json, not application/problem+json. Everything behind the OAuth
+  wall is unobserved and deliberately left unrecorded.
+envelope:
+  shape: '{"error": "<code>"}'
+  content_type: application/json
+  fields:
+  - name: error
+    type: string
+    note: OAuth 2.0 bearer-token error code (RFC 6750 style)
+problems:
+- status: 401
+  code: invalid_token
+  title: Missing or invalid bearer token
+  detail: >-
+    Returned for every anonymous or bad-token request to the MCP endpoint and to any
+    unimplemented /.well-known/* path on mcp.agentio.com — including GET /, POST initialize and
+    POST tools/list.
+  headers:
+    WWW-Authenticate: Bearer resource_metadata="https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp"
+  remediation: >-
+    Follow the resource_metadata URL to the RFC 9728 protected-resource document, then the
+    advertised authorization server (https://api.agentio.com/o), register a client at
+    /o/register, and complete the authorization-code + PKCE flow for the brand-connector:read
+    scope.
+  observed: true
+  source_probe: POST https://mcp.agentio.com/mcp {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+coverage:
+  observed_errors: 1
+  documented_errors: 0
+  note: an authenticated session would be required to observe the tool-level error surface
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://mcp.agentio.com/mcp
+    method: POST
+    http_status: 401
+    content_type: application/json
+  - url: https://mcp.agentio.com/
+    method: GET
+    http_status: 401
+    content_type: application/json

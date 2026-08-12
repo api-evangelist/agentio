@@ -1,0 +1,37 @@
+generated: '2026-08-12'
+method: searched
+source: https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp
+docs: https://www.agentio.com/connector
+note: >-
+  Agentio publishes no scope reference page. The single scope below is the only scope advertised
+  by either discovery document — both the RFC 9728 protected-resource metadata and the RFC 8414
+  authorization-server metadata list scopes_supported = ["brand-connector:read"]. The connector
+  documentation corroborates it: "Every connection is read-only and scoped to one brand."
+schemes:
+- name: AgentioBrandConnectorOAuth
+  source: well-known/agentio-oauth-authorization-server.json
+  issuer: https://api.agentio.com/o
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.agentio.com/connector/consent
+    tokenUrl: https://api.agentio.com/o/token
+scopes:
+- scope: brand-connector:read
+  description: >-
+    Read-only access to a single brand's Agentio data through the hosted MCP connector —
+    campaigns, creator deals and deliverables, YouTube ad performance, and conversion
+    reporting. Cannot write, cannot act on the user's behalf, and cannot reach another
+    brand's data.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/agentio-oauth-protected-resource.json
+  - well-known/agentio-oauth-authorization-server.json
+scope_count: 1
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp
+    http_status: 200
+  - url: https://api.agentio.com/.well-known/oauth-authorization-server/o
+    http_status: 200

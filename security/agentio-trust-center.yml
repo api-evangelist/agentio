@@ -1,0 +1,44 @@
+generated: '2026-08-12'
+method: searched
+probe: true
+url: https://www.agentio.com/security
+note: >-
+  Agentio has no trust.agentio.com or security.agentio.com host (both fail to resolve). It
+  publishes a single security-and-privacy page on its marketing site that names one
+  certification and describes the program. There is no trust portal, no downloadable report,
+  no subprocessor list, and no vulnerability-disclosure contact on that page — so this repo
+  records a trust page, not a vulnerability-disclosure program.
+certifications:
+- SOC 2 Type 2
+program:
+  governance: >-
+    Security and Privacy teams establish policies and controls, monitor compliance with them,
+    and prove security and compliance to third-party auditors. Policies are stated as
+    least-privilege access, defense-in-depth layering, consistent enterprise-wide application,
+    and iterative maturing of controls.
+  data_protection:
+  - all datastores with customer data are encrypted at rest
+  - TLS 1.2 or higher everywhere data crosses potentially insecure networks
+  - application secrets encrypted and stored in Google Cloud Platform Secret Manager
+  product_security:
+  - vulnerability scanning required at key stages of the Secure Development Lifecycle
+  enterprise_security:
+  - centrally managed corporate devices with MDM and anti-malware
+  - endpoint security alerts monitored 24/7/365
+  - MDM-enforced disk encryption, screen lock, and software updates
+evidence:
+- source: https://www.agentio.com/security
+  http_status: 200
+  keywords:
+  - soc 2 type 2
+  - compliance
+  - governance
+  - data protection
+  - secure development lifecycle
+- source: https://trust.agentio.com/
+  http_status: 0
+  note: host does not resolve
+- source: https://www.agentio.com/trust
+  http_status: 404
+x-evidence:
+  fetched: '2026-08-12'

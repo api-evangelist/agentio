@@ -1,0 +1,50 @@
+generated: '2026-08-12'
+method: searched
+source: https://status.agentio.com/, https://www.agentio.com/connector
+versioning:
+  scheme: none-published
+  current: null
+  note: >-
+    Agentio publishes no version identifier for the MCP connector. The endpoint URL
+    (https://mcp.agentio.com/mcp) carries no version segment, the connector documentation names
+    none, and the negotiated MCP protocolVersion cannot be observed anonymously because
+    initialize returns HTTP 401. The OAuth authorization server is mounted at the unversioned
+    path /o on api.agentio.com.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation or sunset policy is published anywhere on agentio.com. The connector page
+    only warns that MCP client screens "change often" and links out to Claude and ChatGPT for
+    their current steps.
+sla:
+  url: null
+  uptime_target: null
+  note: no published SLA or uptime commitment; pricing and plans are not public either
+status_page: https://status.agentio.com/
+status_page_detail:
+  platform: Pulsetic
+  http_status: 200
+  machine_readable: false
+  note: >-
+    A real hosted status page under Agentio's own domain, rendered client-side. It exposes no
+    machine-readable feed: /api/v2/status.json, /api/v2/summary.json, /api/v2/components.json
+    and /history.rss all return HTTP 200 with the same text/html single-page-app shell, which is
+    a soft-404, not data. An agent cannot poll Agentio's status programmatically.
+changelog: null
+changelog_note: >-
+  No changelog, release notes or versioning page found. /changelog returns 404 and the sitemap
+  lists no release-notes URL; the blog is marketing content, not product release notes.
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://status.agentio.com/
+    http_status: 200
+    content_type: text/html
+  - url: https://status.agentio.com/api/v2/summary.json
+    http_status: 200
+    content_type: text/html
+    note: soft-404 SPA shell, not JSON
+  - url: https://www.agentio.com/changelog
+    http_status: 404

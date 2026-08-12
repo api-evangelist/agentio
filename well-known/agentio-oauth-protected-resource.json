@@ -1,0 +1,12 @@
+{
+  "resource": "https://mcp.agentio.com/mcp",
+  "authorization_servers": [
+    "https://api.agentio.com/o"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "scopes_supported": [
+    "brand-connector:read"
+  ]
+}
