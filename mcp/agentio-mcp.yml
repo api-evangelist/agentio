@@ -19,16 +19,15 @@ access:
   - cannot act on the user's behalf
   prerequisites:
   - an Agentio account (sign-in happens during connector setup)
-  - an MCP client that supports custom connectors (docs name Claude and ChatGPT; any MCP
-    client works the same way)
-  - availability depends on the customer's Agentio plan, and a workspace admin may control
-    which connectors can be added
-  management: Settings -> Integrations in the Agentio app lists every connected AI app and
-    when it connected; disconnecting takes effect immediately. Each app holds one connection.
+  - an MCP client that supports custom connectors (docs name Claude and ChatGPT; any MCP client works
+    the same way)
+  - availability depends on the customer's Agentio plan, and a workspace admin may control which connectors
+    can be added
+  management: Settings -> Integrations in the Agentio app lists every connected AI app and when it connected;
+    disconnecting takes effect immediately. Each app holds one connection.
 authorization:
   scheme: OAuth 2.1 authorization code + PKCE
-  challenge: 'anonymous requests return HTTP 401 with WWW-Authenticate: Bearer
-    resource_metadata="https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp"'
+  challenge: 'anonymous requests return HTTP 401 with WWW-Authenticate: Bearer resource_metadata="https://mcp.agentio.com/.well-known/oauth-protected-resource/mcp"'
   protected_resource_metadata: well-known/agentio-oauth-protected-resource.json
   authorization_server_metadata: well-known/agentio-oauth-authorization-server.json
   scopes:
@@ -36,13 +35,11 @@ authorization:
   profile: authentication/agentio-authentication.yml
 tools:
   introspection: gated
-  note: >-
-    NOT ENUMERATED. An anonymous JSON-RPC tools/list POST to https://mcp.agentio.com/mcp
-    returns HTTP 401 {"error": "invalid_token"}, and initialize returns 401 as well, so the
-    live tool names and inputSchemas require an authenticated introspection with a
-    brand-connector:read token. Agentio publishes no llms.txt and no tool reference page, so
-    there is no published tool list to fall back on. No tool names are recorded here, because
-    inventing them would fabricate the provider's contract.
+  note: 'NOT ENUMERATED. An anonymous JSON-RPC tools/list POST to https://mcp.agentio.com/mcp returns
+    HTTP 401 {"error": "invalid_token"}, and initialize returns 401 as well, so the live tool names and
+    inputSchemas require an authenticated introspection with a brand-connector:read token. Agentio publishes
+    no llms.txt and no tool reference page, so there is no published tool list to fall back on. No tool
+    names are recorded here, because inventing them would fabricate the provider''s contract.'
   documented_capabilities:
   - read campaigns
   - read creator deals and deliverables
@@ -52,8 +49,7 @@ tools:
   documented_example_questions:
   - Which of my campaigns are running right now?
   - How did my YouTube ads perform last month, broken down by campaign?
-  - What did we spend per conversion last quarter, and which sources did those conversions
-    come from?
+  - What did we spend per conversion last quarter, and which sources did those conversions come from?
 x-evidence:
   fetched: '2026-08-12'
   probes:
@@ -68,3 +64,10 @@ x-evidence:
     http_status: 200
   - url: https://www.agentio.com/connector
     http_status: 200
+deployment:
+  mode: remote
+  endpoint: https://mcp.agentio.com/mcp
+  verified: probed
+  probe: wall
+  checked: '2026-08-12'
+  source: catalog MCP census
