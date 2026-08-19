@@ -36,7 +36,7 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://cdn.prod.website-files.com/64dabf3558320122b88c5b84/6912391402abbaf1724f8173_agentio-logo-cropped%20(1).png
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-12'
 tags:
