@@ -41,6 +41,18 @@ created: '2026-07-17'
 modified: '2026-08-12'
 tags:
 - Company
+- AdTech
+- Advertising
+- Creator Economy
+- Influencer Marketing
+- Marketing
+- Artificial Intelligence
+- YouTube
+- MCP
+- Agents
+- Analytics
+tags_raw:
+- Company
 - Adtech
 - Advertising
 - Creator Economy
@@ -67,6 +79,11 @@ apis:
   humanURL: https://www.agentio.com/connector
   baseURL: https://mcp.agentio.com/mcp
   tags:
+  - MCP
+  - Agents
+  - Advertising
+  - Analytics
+  tags_raw:
   - MCP
   - Model Context Protocol
   - Agents
