@@ -19,6 +19,34 @@
     registered_name: com.agentio/brand-connector
     register_id: com.agentio/brand-connector
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: agentio-antler
+  label: Antler
+  partner_name: Antler
+  category: accelerator portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://www.antler.co/portfolio
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Antler portfolio (antler.co/portfolio)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Agentio
+    register_id: https://www.antler.co/portfolio
+    register_country: US
+    register_website: https://agentio.com/
+    matched_domain: agentio.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    year: '2023'
+    sector: B2B Software
   status: not-a-workflow
   arazzo: null
