@@ -64,6 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Agentio is a company surfaced as a portfolio company of craft-ventures, forerunner-ventures and added to the API Evangelist network as a stub for enrichment. Sector: adtech. This profile is a lead awaiting the enrichment pipeline.
+Agentio is an AI-native platform for creator advertising that connects brands with content creators across YouTube, Meta, and beyond. The two-sided platform gives brands agentic tooling to build, automate, and scale creator programs — handling creator matching and vetting, performance prediction from first-party creator data, campaign management, full-funnel measurement, and optimization — while giving creators personalized opportunities from top brands without manual negotiation. Founded by Arthur Leopold and Jonathan Meyers and based in Brooklyn, New York, Agentio holds official API marketing-partner status with closed advertising ecosystems and has raised $56M total, including a $40M Series B led by Forerunner at a $340M valuation. Agentio operates a private product application (app.agentio.com) and publishes no REST OpenAPI, GraphQL schema, or developer portal — but it does run a documented, production hosted MCP (Model Context Protocol) server, the Agentio Brand Connector at https://mcp.agentio.com/mcp, which lets a brand read its own campaigns, creator deals and deliverables, YouTube ad performance, and conversion reporting from any MCP client such as Claude or ChatGPT. Access is read-only, scoped to a single brand, and gated by OAuth 2.1 with PKCE and dynamic client registration.
 
-Backed by: craft-ventures, forerunner-ventures — https://agentio.com
+**Areas:** Company · AdTech · Advertising · Creator Economy · Influencer Marketing · Marketing · Artificial Intelligence · YouTube · MCP · Agents · Analytics
+
+## Agentio on APIs.io
+
+Everything profiled for Agentio is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/agentio/](https://apis.io/providers/agentio/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Agentio Brand Connector (MCP)](https://apis.io/apis/agentio/agentio-brand-connector-mcp/) — Agentio's hosted, remote Model Context Protocol server. A brand adds https://mcp.agentio.com/mcp to any MCP client (Claude, ChatGPT, or any other…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Agentio Brand Connector](https://apis.io/servers/agentio/agentio-brand-connector/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Agentio Authentication](https://apis.io/security/agentio/agentio-authentication/)
+- [Agentio Domain Security](https://apis.io/security/agentio/agentio-domain-security/)
+- [Agentio Trust Center](https://apis.io/security/agentio/agentio-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Agentio Scopes](https://apis.io/scopes/agentio/agentio-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Agentio Plans Pricing](https://apis.io/plans/agentio/agentio-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Agentio Rate Limits](https://apis.io/rate-limits/agentio/agentio-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.agentio.com)
+- [Documentation](https://www.agentio.com/connector)
+- [Getting started](https://www.agentio.com/connector)
+- [Sign up](https://www.agentio.com/signup)
+- [Support](https://www.agentio.com/contact)
+- [Blog](https://www.agentio.com/blog)
+- [Compliance](https://www.agentio.com/security)
+- [Terms of service](https://www.agentio.com/terms)
+- [Privacy policy](https://www.agentio.com/privacy)
+- [Status](https://status.agentio.com/)
+
+## API Evangelist rating
+
+**Kin Score 31.3** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 50.0 |
+
+**Agent readiness 32.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 36.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agentio/](https://apis.io/providers/agentio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Agentio: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/agentio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
