@@ -129,18 +129,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 31.3** — thin · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 32.3** — thin · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 68.3 |
 | Contract quality | 0.0 |
 | Contract governance | 18.2 |
-| Operational transparency | 7.9 |
+| Operational transparency | 7.1 |
 | Developer ergonomics | 40.5 |
-| Access clarity | 50.0 |
+| Access clarity | 59.6 |
 
-**Agent readiness 32.7** — agent-ready
+**Agent readiness 32.0** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -165,8 +165,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | na |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 36.4** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 30.9** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agentio/](https://apis.io/providers/agentio/).
 
